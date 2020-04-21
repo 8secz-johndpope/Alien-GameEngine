@@ -408,5 +408,5 @@ float ModuleInput::GetControllerAxis(GamePad* gp , SDL_GameControllerAxis axis) 
 	if (axisValue < -DEAD_ZONE || axisValue > DEAD_ZONE) {
 		return Maths::Map(axisValue, SDL_MIN_SINT16, SDL_MAX_SINT16, -1.0f, 1.0f);
 	}
-	return 0;
+	return 0.0f;
 }
