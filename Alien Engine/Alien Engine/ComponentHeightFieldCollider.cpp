@@ -7,6 +7,10 @@
 #include "GameObject.h"
 #include "imgui/imgui.h"
 
+#include "Maths.h"
+
+#include <limits>
+
 #include "mmgr/mmgr.h"
 
 
@@ -85,7 +89,9 @@ PxShape* ComponentHeightFieldCollider::CreateHeightField()
 
 	for (uint i = 0; i < numCols*numRows; ++i)
 	{
-		samples[i].height = sorted_vertices[i].y; // TODO
+		samples[i].height = Maths::Map(sorted_vertices[i].y, FLT_MIN, FLT_MAX, SDL_MIN_SINT16, SDL_MAX_SINT16);
+		//LOG_ENGINE("BLABLa");
+
 	}
 
 	PxHeightFieldDesc hfDesc;

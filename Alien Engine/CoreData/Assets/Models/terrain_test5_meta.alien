@@ -1,0 +1,47 @@
+{
+    "Meta": {
+        "ID": "4657532800711048698",
+        "NumMeshes": 1,
+        "Name": "terrain_test5",
+        "NumBones": 0,
+        "NumAnimations": 0,
+        "Animations": [],
+        "NumMaterials": 1,
+        "PathMeshes": [
+            "Library\/Meshes\/16401134566642941536.alienMesh"
+        ],
+        "PathAnimations": [],
+        "PathBones": [],
+        "PathMaterials": [
+            "Library\/Materials\/7754798255768978613.material"
+        ]
+    },
+    "Nodes": [
+        {
+            "pos": [
+                0,
+                0,
+                0
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rot": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "nodeNum": 2,
+            "parentNum": 1,
+            "nodeName": "pPlane1",
+            "parentName": "terrain_test5",
+            "meshIndex": 0,
+            "materialIndex": 0,
+            "numBones": 0,
+            "bonesIndex": []
+        }
+    ]
+}
