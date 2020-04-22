@@ -355,6 +355,7 @@
     <ClInclude Include="ComponentButton.h" />
     <ClInclude Include="ComponentCanvas.h" />
     <ClInclude Include="ComponentCheckbox.h" />
+    <ClInclude Include="ComponentHeightFieldCollider.h" />
     <ClInclude Include="ComponentImage.h" />
     <ClInclude Include="ComponentLightDirectional.h" />
     <ClInclude Include="ComponentLightPoint.h" />
@@ -590,6 +591,7 @@
     <ClCompile Include="ComponentButton.cpp" />
     <ClCompile Include="ComponentCanvas.cpp" />
     <ClCompile Include="ComponentCheckbox.cpp" />
+    <ClCompile Include="ComponentHeightFieldCollider.cpp" />
     <ClCompile Include="ComponentImage.cpp" />
     <ClCompile Include="ComponentLightDirectional.cpp" />
     <ClCompile Include="ComponentLightPoint.cpp" />

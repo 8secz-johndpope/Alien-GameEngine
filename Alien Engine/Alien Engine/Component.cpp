@@ -93,6 +93,9 @@ std::string Component::EnumToString(ComponentType type)
 	case ComponentType::CONVEX_HULL_COLLIDER:
 		return std::string("Collider Convex Hull");
 		break;
+	case ComponentType::HEIGHTFIELD_COLLIDER:
+		return std::string("Collider HeightField");
+		break;
 	case ComponentType::RIGID_BODY:
 		return std::string("Rigid Body");
 		break;

@@ -33,7 +33,7 @@ private:
 
 private:
 
-	ComponentMesh* mesh = nullptr;
+	//ComponentMesh* mesh = nullptr;
 	float3 size = float3::zero();
 
 	int vertex_limit = 64.0f; // default vertex limit

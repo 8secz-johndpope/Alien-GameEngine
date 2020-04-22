@@ -26,6 +26,7 @@ class __declspec(dllexport) ComponentMesh : public Component {
 	friend class ComponentSphereCollider;
 	friend class ComponentCapsuleCollider;
 	friend class ComponentConvexHullCollider;
+	friend class ComponentHeightFieldCollider;
 	friend class GameObject;
 	friend class ModuleCamera3D;
 	friend class ModuleObjects;

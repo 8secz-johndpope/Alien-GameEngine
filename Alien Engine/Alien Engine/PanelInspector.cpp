@@ -47,6 +47,7 @@
 #include "ComponentSphereCollider.h"
 #include "ComponentCapsuleCollider.h"
 #include "ComponentConvexHullCollider.h"
+#include "ComponentHeightFieldCollider.h"
 #include "ComponentRigidBody.h"
 #include "ComponentCharacterController.h"
 
@@ -129,7 +130,7 @@ void PanelInspector::PanelLogic()
 		DropScript();
 
 	}
-	else if (App->objects->GetSelectedObjects().size() > 1) 
+	else if (App->objects->GetSelectedObjects().size() > 1)
 	{
 		if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ImGui::Spacing();
@@ -602,7 +603,7 @@ void PanelInspector::ButtonAddComponent()
 					if (!selected->HasComponent(ComponentType::UI))
 					{
 						ComponentCanvas* canvas = GetCanvas();
-						Component* comp_emitter = nullptr;	
+						Component* comp_emitter = nullptr;
 						comp = new ComponentCheckbox(selected);
 						comp_emitter = new ComponentAudioEmitter(selected);
 						dynamic_cast<ComponentUI*>(comp)->SetCanvas(canvas);
@@ -654,21 +655,30 @@ void PanelInspector::ButtonAddComponent()
 						LOG_ENGINE("The selected object already has Component UI!");
 					break; }
 				case ComponentType::BOX_COLLIDER: {
-						comp = new ComponentBoxCollider(selected);
-						selected->AddComponent(comp);
+					comp = new ComponentBoxCollider(selected);
+					selected->AddComponent(comp);
 					break; }
 				case ComponentType::SPHERE_COLLIDER: {
-						comp = new ComponentSphereCollider(selected);
-						selected->AddComponent(comp);
+					comp = new ComponentSphereCollider(selected);
+					selected->AddComponent(comp);
 					break; }
 				case ComponentType::CAPSULE_COLLIDER: {
-						comp = new ComponentCapsuleCollider(selected);
-						selected->AddComponent(comp);
+					comp = new ComponentCapsuleCollider(selected);
+					selected->AddComponent(comp);
 					break; }
 				case ComponentType::CONVEX_HULL_COLLIDER: {
-						comp = new ComponentConvexHullCollider(selected);
-						selected->AddComponent(comp);
+					comp = new ComponentConvexHullCollider(selected);
+					selected->AddComponent(comp);
 					break; }
+				case ComponentType::HEIGHTFIELD_COLLIDER: {
+					if (!selected->HasComponent(ComponentType::HEIGHTFIELD_COLLIDER)) {
+						comp = new ComponentHeightFieldCollider(selected);
+						selected->AddComponent(comp);
+					}
+					else
+						LOG_ENGINE("The selected object already has Component HeightField Collider!");
+					break;
+				}
 				case ComponentType::RIGID_BODY: {
 					if (!selected->HasComponent(ComponentType::RIGID_BODY))
 					{
@@ -732,7 +742,7 @@ void PanelInspector::ShowModelImportSettings(ResourceModel* model)
 					anim->end_tick = /*is_dae ? (float)end_tick / DAE_FPS :*/ (uint)end_tick;
 				}
 			}
-				
+
 			ImGui::Checkbox("Loops", &anim->loops);
 			ImGui::Separator();
 			ImGui::PopID();

@@ -13,6 +13,7 @@ class ResourceMesh : public Resource {
 	friend class ModuleImporter;
 	friend class ResourceModel;
 	friend class ComponentDeformableMesh;
+	//friend class ComponentHeightFieldCollider;
 public:
 
 	ResourceMesh();

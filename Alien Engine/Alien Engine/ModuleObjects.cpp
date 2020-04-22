@@ -266,7 +266,7 @@ update_status ModuleObjects::PostUpdate(float dt)
 			
 			// TODO : DELETE ------------------------
 
-			//App->physx->DrawWorld();
+			App->physx->DrawWorld();
 
 			// -------------------------------------
 		}

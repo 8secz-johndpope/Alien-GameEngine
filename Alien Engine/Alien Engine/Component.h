@@ -43,6 +43,8 @@ enum class ComponentType {
 	SCRIPT = 29,
 	UI = 30,
 
+	HEIGHTFIELD_COLLIDER = 31,
+
 	MAX //LAST LAST LAST
 };
 

@@ -18,6 +18,7 @@ class ModulePhysX : public Module
 	friend class ComponentSphereCollider;
 	friend class ComponentCapsuleCollider;
 	friend class ComponentConvexHullCollider;
+	friend class ComponentHeightFieldCollider;
 	friend class ComponentCharacterController;
 	friend class ComponentBasePhysic;
 
