@@ -29,6 +29,7 @@ class __declspec(dllexport) ComponentCamera : public Component {
 	friend class Viewport;
 	friend class Octree;
 	friend class OctreeNode;
+	friend class PanelConfig;
 public:
 
 	ComponentCamera(GameObject* attach);
@@ -40,7 +41,8 @@ public:
 	float4x4 GetProjectionMatrix4f4() const;
 
 	float* GetViewMatrix() const;
-	float4x4 GetViewMatrix4x4() const;
+	float4x4 GetViewMatrix4x4() const; 
+	void SetViewMatrix4x4(const float4x4& mat);
 
 	void InvertPitch();
 
@@ -70,12 +72,14 @@ public:
 
 	void DrawSkybox();
 
-	static float2 WorldToScreenPoint(float3 world_position);
+	static float2 WorldToScreenPoint(const float3& world_position);
 
 private:
 	void AspectRatio(int width_ratio, int height_ratio, bool fov_type = 0);
 
 	bool DrawInspector();
+
+	void DrawScene(ComponentCamera* camera) override; 
 
 	void DrawFrustum();
 	void DrawIconCamera();

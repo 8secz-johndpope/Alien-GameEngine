@@ -206,6 +206,7 @@ private:
 	void UpdateGamePadInput();
 	u64 SetNewSelected(std::string neightbour, u64 selected_neightbour);
 	ComponentCanvas* GetCanvas();
+	void UIOrdering(std::vector<std::pair<float, GameObject*>>* current, std::vector<std::pair<float, GameObject*>>* ui_2d, std::vector<std::pair<float, GameObject*>>* ui_world);
 
 	void CompareName(std::vector<std::pair<std::string, std::function<void()>>>* listeners, const std::vector<ComponentScript*>& scriptsVec);
 
@@ -218,6 +219,8 @@ public:
 	u64 selected_ui = -1;
 
 	std::vector<ResourceScene*> current_scenes;
+
+	Viewport* current_viewport = nullptr;
 
 	std::list<Alien*> current_scripts;
 
@@ -315,7 +318,6 @@ public:
 	std::list<DirLightProperties*> directional_light_properites;
 	std::list<PointLightProperties*> point_light_properites;
 	std::list<SpotLightProperties*> spot_light_properites;
-
 	std::vector<std::pair<u64, GameObject**>> to_add;
 
 	std::string sceneNameToChange;
@@ -330,7 +332,6 @@ private:
 
 	std::stack<ReturnZ*> save_return_actions;
 	std::stack<ReturnZ*> save_fordward_actions;
-
 
 
 	std::list<InvokeInfo*> invokes;

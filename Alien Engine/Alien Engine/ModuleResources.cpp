@@ -587,7 +587,7 @@ ResourceShader* ModuleResources::GetShaderByName(std::string shaderName)
 			if (App->StringCmp((*res)->GetName(), shaderName.c_str()))
 			{
 				desiredShader = (ResourceShader*)(*res);
-				break;
+				return desiredShader;
 			}
 		}
 	}
@@ -699,8 +699,9 @@ void ModuleResources::ReadAllMetaData()
 	ReadShaders(directories, files, SHADERS_FOLDER);
 	files.clear();
 	directories.clear();
-	default_shader = GetShaderByName("default_shader");
+	simple_depth_shader = GetShaderByName("simple_depth_shader");
 	default_particle_shader = GetShaderByName("particle_shader");
+	default_shader = GetShaderByName("default_shader");
 	skybox_shader = GetShaderByName("skybox_shader");
 	water_shader = GetShaderByName("water_shader");
 
@@ -775,10 +776,17 @@ void ModuleResources::ReadAllMetaData()
 	directories.clear();
 	default_shader = (ResourceShader*)GetResourceWithID(2074311779325559006);
 	skybox_shader = (ResourceShader*)GetResourceWithID(10031399484334738574);
-	default_particle_shader = (ResourceShader*)GetResourceWithID(2017390725125490915);
 	water_shader = (ResourceShader*)GetResourceWithID(14940717270935665446);
+	simple_depth_shader = (ResourceShader*)GetResourceWithID(12293234483734622872);
+	default_particle_shader = (ResourceShader*)GetResourceWithID(2017390725125490915);
 	default_particle_shader->SetName("particle_shader");
 	default_particle_shader->TryToSetShaderType();
+	shield_fresnel_shader = (ResourceShader*)GetResourceWithID(5257671272918645017);
+	shield_fresnel_shader->SetName("shield_fresnel_shader");
+	shield_fresnel_shader->TryToSetShaderType();
+	shield_shader = (ResourceShader*)GetResourceWithID(15018513288750837760);
+	shield_shader->SetName("shield_shader");
+	shield_shader->TryToSetShaderType();
 
 	// materials
 	App->file_system->DiscoverFiles(LIBRARY_MATERIALS_FOLDER, files, directories, true);

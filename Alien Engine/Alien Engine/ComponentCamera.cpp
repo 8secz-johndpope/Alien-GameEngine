@@ -68,12 +68,12 @@ ComponentCamera::ComponentCamera(GameObject* attach): Component(attach)
 
 	// This is the default skybox
 
-	cubemap->neg_x.assign(LIBRARY_TEXTURES_FOLDER"6647353476053033927.dds");
-	cubemap->pos_x.assign(LIBRARY_TEXTURES_FOLDER"16365362325777703218.dds");
-	cubemap->pos_y.assign(LIBRARY_TEXTURES_FOLDER"13945118401434491814.dds");
-	cubemap->neg_y.assign(LIBRARY_TEXTURES_FOLDER"13294645959885894553.dds");
-	cubemap->pos_z.assign(LIBRARY_TEXTURES_FOLDER"882162789730207050.dds");
-	cubemap->neg_z.assign(LIBRARY_TEXTURES_FOLDER"13059454142476507694.dds");
+	cubemap->neg_x.assign(LIBRARY_TEXTURES_FOLDER"14059935274421270400.dds");
+	cubemap->pos_x.assign(LIBRARY_TEXTURES_FOLDER"17871350930873594524.dds");
+	cubemap->pos_y.assign(LIBRARY_TEXTURES_FOLDER"5118434943308934301.dds");
+	cubemap->neg_y.assign(LIBRARY_TEXTURES_FOLDER"14265519993990640998.dds");
+	cubemap->pos_z.assign(LIBRARY_TEXTURES_FOLDER"3680900417465944678.dds");
+	cubemap->neg_z.assign(LIBRARY_TEXTURES_FOLDER"16155666848095087743.dds");
 
 	auto faces = cubemap->ToVector();
 	skybox_texture_id = skybox->LoadCubeMapFromLibraryFiles(faces);
@@ -269,8 +269,18 @@ bool ComponentCamera::DrawInspector()
 		}
 
 		ImGui::Spacing();
-		ImGui::Separator();
-		ImGui::Spacing();
+		if (ImGui::Button("Apply Fog to Editor Camera"))
+		{
+			App->renderer3D->scene_fake_camera->activeFog = activeFog; 
+			App->renderer3D->scene_fake_camera->fogDensity = fogDensity;
+			App->renderer3D->scene_fake_camera->fogGradient = fogGradient;
+			App->renderer3D->scene_fake_camera->camera_color_background = camera_color_background;
+		}
+
+		if (ImGui::Button("Reset Editor Camera"))
+		{
+			App->renderer3D->scene_fake_camera->Reset();
+		}
 
 		ImGui::Spacing();
 		ImGui::Separator();
@@ -542,6 +552,22 @@ bool ComponentCamera::DrawInspector()
 	return true;
 }
 
+void ComponentCamera::DrawScene(ComponentCamera* camera)
+{
+	
+	OPTICK_EVENT();
+
+	if (game_object_attached->IsSelected())
+	{
+		DrawFrustum();
+		frustum.pos = game_object_attached->transform->GetGlobalPosition();
+		frustum.front = game_object_attached->transform->GetGlobalRotation().WorldZ();
+		frustum.up = game_object_attached->transform->GetGlobalRotation().WorldY();
+	}
+
+	DrawIconCamera();
+}
+
 void ComponentCamera::Reset()
 {
 	camera_color_background = { 0.05f, 0.05f, 0.05f, 1.0f };
@@ -631,6 +657,10 @@ float4x4 ComponentCamera::GetViewMatrix4x4() const
 	return float4x4(frustum.ViewMatrix()).Transposed();
 }
 
+void ComponentCamera::SetViewMatrix4x4(const float4x4& mat)
+{
+	ViewMatrix = mat;
+}
 void ComponentCamera::InvertPitch()
 {
 	float3x4* v_m = &frustum.ViewMatrix();
@@ -765,7 +795,7 @@ void ComponentCamera::DrawSkybox()
 	}
 }
 
-float2 ComponentCamera::WorldToScreenPoint(float3 world_position)
+float2 ComponentCamera::WorldToScreenPoint(const float3& world_position)
 {
 	float3 position = App->renderer3D->GetCurrentMainCamera()->frustum.ViewProjMatrix().MulPos(world_position);
 
@@ -774,6 +804,8 @@ float2 ComponentCamera::WorldToScreenPoint(float3 world_position)
 
 void ComponentCamera::DrawFrustum()
 {
+	OPTICK_EVENT();
+
 	static float3 points[8];
 	frustum.GetCornerPoints(points);
 
@@ -823,15 +855,15 @@ void ComponentCamera::DrawFrustum()
 
 void ComponentCamera::DrawIconCamera()
 {
+	OPTICK_EVENT();
+
 	if (mesh_camera != nullptr && print_icon)
 	{
 		ComponentTransform* transform = game_object_attached->transform;
 		float3 position = transform->GetGlobalPosition() - frustum.front.Normalized() * 2;
 		Quat rotated = transform->GetGlobalRotation() * (Quat{ 0,0,1,0 } * Quat{ 0.7071,0,0.7071,0 });
 		float4x4 matrix = float4x4::FromTRS(position, rotated, { 0.1F,0.1F,0.1F });
-		glDisable(GL_LIGHTING);
 		Gizmos::DrawPoly(mesh_camera->mesh, matrix, camera_icon_color);
-		glEnable(GL_LIGHTING);
 	}
 }
 
