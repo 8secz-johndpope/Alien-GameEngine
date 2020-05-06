@@ -54,10 +54,11 @@ PxShape* ComponentHeightFieldCollider::CreateHeightField()
 		return nullptr;
 	}
 
+	float4x4 trans = transform->GetGlobalMatrix();
 	// create vectors to sort vertices 
 	std::vector<float3> sorted_vertices;
 	for (uint i = 0; i < nverts * 3; i += 3) {
-		sorted_vertices.push_back(float3(vertices[i], vertices[i + 1], vertices[i + 2]));
+		sorted_vertices.push_back(trans.TransformPos(float3(vertices[i], vertices[i + 1], vertices[i + 2])));
 	}
 	
 	// sort by x then z
@@ -89,7 +90,8 @@ PxShape* ComponentHeightFieldCollider::CreateHeightField()
 
 	for (uint i = 0; i < numCols*numRows; ++i)
 	{
-		samples[i].height = Maths::Map(sorted_vertices[i].y, FLT_MIN, FLT_MAX, SDL_MIN_SINT16, SDL_MAX_SINT16);
+		//samples[i].height = Maths::Map(sorted_vertices[i].y, FLT_MIN, FLT_MAX, SDL_MIN_SINT16, SDL_MAX_SINT16);
+		samples[i].height = sorted_vertices[i].y;
 		//LOG_ENGINE("BLABLa");
 
 	}
@@ -150,3 +152,4 @@ bool ComponentHeightFieldCollider::CompareZ(float3 a, float3 b)
 {
 	return a.z > b.z;
 }
+

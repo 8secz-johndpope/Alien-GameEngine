@@ -33,6 +33,7 @@ private:
 
 	static bool CompareX(float3 a, float3 b);
 	static bool CompareZ(float3 a, float3 b);
+	static bool CompareY(float3 a, float3 b);
 
 private:
 

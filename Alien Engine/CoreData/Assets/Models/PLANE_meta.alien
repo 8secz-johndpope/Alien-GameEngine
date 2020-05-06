@@ -1,0 +1,47 @@
+{
+    "Meta": {
+        "ID": "3724419065395438",
+        "NumMeshes": 1,
+        "Name": "PLANE",
+        "NumBones": 0,
+        "NumAnimations": 0,
+        "Animations": [],
+        "NumMaterials": 1,
+        "PathMeshes": [
+            "Library\/Meshes\/3656324749963204162.alienMesh"
+        ],
+        "PathAnimations": [],
+        "PathBones": [],
+        "PathMaterials": [
+            "Library\/Materials\/4537680653212294051.material"
+        ]
+    },
+    "Nodes": [
+        {
+            "pos": [
+                0,
+                0,
+                0
+            ],
+            "scale": [
+                100,
+                100,
+                100
+            ],
+            "rot": [
+                -0.7071068286895752,
+                0,
+                0,
+                0.70710670948028564
+            ],
+            "nodeNum": 2,
+            "parentNum": 1,
+            "nodeName": "Grid",
+            "parentName": "PLANE",
+            "meshIndex": 0,
+            "materialIndex": 0,
+            "numBones": 0,
+            "bonesIndex": []
+        }
+    ]
+}
